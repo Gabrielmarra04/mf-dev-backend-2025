@@ -1,9 +1,15 @@
+using mf_dev_backend_2025.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // Enable runtime compilation for Razor views
+
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Configura a conexão com o banco de dados SQL Server
 
 var app = builder.Build();
 
